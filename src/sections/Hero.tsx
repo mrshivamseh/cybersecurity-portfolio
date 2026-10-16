@@ -15,6 +15,8 @@ import { portfolio } from '../data/portfolio';
 import './Hero.css';
 
 function Hero() {
+  const resumeUrl = `${import.meta.env.BASE_URL}${portfolio.resume.file.replace(/^\/+/, '')}`;
+
   return (
     <section className="hero-section" id="home">
       <div className="hero-grid-bg" aria-hidden="true" />
@@ -54,7 +56,7 @@ function Hero() {
 
             <a
               className="button button-secondary"
-              href={portfolio.resume.file}
+              href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -64,7 +66,7 @@ function Hero() {
 
             <a
               className="button button-primary"
-              href={portfolio.resume.file}
+              href={resumeUrl}
               download={portfolio.resume.fileName}
             >
               <Download size={17} />

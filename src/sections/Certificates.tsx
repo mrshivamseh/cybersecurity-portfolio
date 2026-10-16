@@ -13,6 +13,10 @@ import { portfolio } from '../data/portfolio';
 import './Certificates.css';
 
 function Certificates() {
+  const getCertificateUrl = (file: string) => {
+    return `${import.meta.env.BASE_URL}${file.replace(/^\/+/, '')}`;
+  };
+
   return (
     <section className="section certificates-section" id="certificates">
       <div className="container">
@@ -86,7 +90,7 @@ function Certificates() {
 
                 {certificate.file ? (
                   <a
-                    href={certificate.file}
+                    href={getCertificateUrl(certificate.file)}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`View ${certificate.title} certificate PDF`}
@@ -118,4 +122,3 @@ function Certificates() {
 }
 
 export default Certificates;
-
