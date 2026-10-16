@@ -264,3 +264,46 @@ color: #39ff88;
 transition: none;
 }
 }
+
+/* Mobile navbar reliability fix */
+@media (max-width: 700px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+  }
+
+  .navbar {
+    position: relative;
+    gap: 12px;
+  }
+
+  .navbar-brand {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .navbar-menu-toggle {
+    position: relative;
+    z-index: 1002;
+    flex-shrink: 0;
+    touch-action: manipulation;
+  }
+
+  .navbar-mobile-menu {
+    position: relative;
+    z-index: 1001;
+    width: 100%;
+    max-height: calc(100dvh - 70px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar-mobile-menu a {
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+}
+

@@ -16,17 +16,45 @@ const navLinks = [
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const handleMobileNavigation = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    event.preventDefault();
+
+    const targetId = href.slice(1);
+    const target = document.getElementById(targetId);
+    
+
+    setMenuOpen(false);
+
+    if (!target) {
+      console.error(`Navigation target not found: ${targetId}`);
+      return;
+    }
+
+    window.history.replaceState(null, '', href);
+
+    setTimeout(() => {
+    target.scrollIntoView({
+    behavior: 'auto',
+    block: 'start',
+  });
+}, 300);
+  };
 
   return (
     <motion.header
       className="site-header"
-      initial={{ opacity: 0, y: -18 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55 }}
     >
       <nav className="navbar container" aria-label="Main navigation">
-        <a className="navbar-brand" href="#home" onClick={closeMenu}>
+        <a
+          className="navbar-brand"
+          href="#home"
+          onClick={() => setMenuOpen(false)}
+        >
           <span className="navbar-brand-icon">
             <ShieldCheck size={22} />
           </span>
@@ -59,7 +87,7 @@ function Navbar() {
         </button>
       </nav>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {menuOpen && (
           <motion.div
             className="navbar-mobile-menu"
@@ -72,7 +100,9 @@ function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={closeMenu}
+                onClick={(event) =>
+                  handleMobileNavigation(event, link.href)
+                }
               >
                 {link.label}
                 <ArrowUpRight size={16} />
@@ -86,3 +116,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
